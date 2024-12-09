@@ -1,0 +1,62 @@
+﻿@inject ISnackbar Snackbar;
+@using TaskManager.Srv.Model.ViewModel;
+
+<div class="milestone-div">
+    <div>
+        <MudText class="milestone-text" onclick="@(() => ToggleDrawer())"><b>Határidők (@milestoneList.Count darab)</b></MudText>
+        <MudIconButton class="add-btn" Color="Color.Primary" Icon="@Icons.Material.Filled.Add" OnClick="CreateMilestone"></MudIconButton>
+    </div>
+
+    @if (IsOpen)
+    {
+        <MudTable class="milestone" @ref="milestoneTable" ServerData="LoadData" Virtualize="true"  Dense="true" Hover="true" Elevation="0" SortLabel="Sort By" CanCancelEdit="true" CommitEditTooltip="Mentés"
+                  CancelEditTooltip="Mégse" ApplyButtonPosition="TableApplyButtonPosition.Start" EditButtonPosition="TableEditButtonPosition.Start" EditTrigger="TableEditTrigger.EditButton"
+                  IsEditRowSwitchingBlocked="false" RowEditPreview="BackUpItem" RowEditCancel="ResetMilestoneToOriginal" RowEditCommit="UpdateMilestone">
+            <HeaderContent>
+                <MudTh class="text-color">Név</MudTh>
+                <MudTh class="text-color"><MudTableSortLabel SortBy="new Func<MilestoneViewModel, object>(x => x.Planned!)">Tervezett</MudTableSortLabel></MudTh>
+                <MudTh class="text-color">Teljesített</MudTh>
+                <MudTh></MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd class="milestone-name-th" DataLabel="Név">@context.Name</MudTd>
+                <MudTd class="milestone-date-th" DataLabel="Tervezett">@Convert.ToDateTime(@context.Planned).ToString("yyyy/MM/dd")</MudTd>
+                <MudTd class="milestone-date-th" DataLabel="Teljesített">@if (context.Actual != null)
+                    {
+                        @Convert.ToDateTime(@context.Actual).ToString("yyyy/MM/dd")
+                    }
+                </MudTd>
+                <MudTd class="milestone-delete-done">
+                <MudTooltip Duration="500" Text="lezárás">
+                        <MudIconButton class="sub-btn" Icon="@Icons.Material.Filled.Done" Color="Color.Primary" Size="Size.Small" OnClick="(() => PopUpButton(context))"></MudIconButton>
+                </MudTooltip>
+                </MudTd>
+                <MudTd class="milestone-delete-done">
+                    <MudTooltip Duration="500" Text="törlés">
+                        <MudIconButton class="sub-btn" Icon="@Icons.Material.Filled.Delete" Color="Color.Primary" Size="Size.Small" OnClick="(() => DeletePopUpButton(context))"></MudIconButton>
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <RowEditingTemplate>
+                <MudTd DataLabel="Név">
+                    <MudTextField Style="font-size: 14px;" @bind-Value="@context.Name" Variant="Variant.Outlined" Margin="Margin.Dense" Required></MudTextField>
+                </MudTd>
+                <MudTd DataLabel="Tervezett">
+                     <MudDatePicker Style="font-size: 14px;" @bind-Date="@context.Planned" Variant="Variant.Outlined" Margin="Margin.Dense">
+                     </MudDatePicker>
+                </MudTd>
+                <MudTd DataLabel="Teljesítés">@if (context.Actual != null) { @Convert.ToDateTime(@context.Actual).ToString("yyyy/MM/dd") }</MudTd>
+                <MudTd class="milestone-delete-done">
+                        <MudIconButton class="sub-btn" Icon="@Icons.Material.Filled.Done" Color="Color.Primary" Size="Size.Small" Disabled></MudIconButton>
+                </MudTd>
+                <MudTd class="milestone-delete-done">
+                     <MudIconButton class="sub-btn" Icon="@Icons.Material.Filled.Delete" Color="Color.Primary" Size="Size.Small" Disabled></MudIconButton>
+                </MudTd>
+            </RowEditingTemplate>
+            <EditButtonContent Context="button">
+                <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Color="Color.Primary" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+            </EditButtonContent>
+        </MudTable>
+    }
+</div>

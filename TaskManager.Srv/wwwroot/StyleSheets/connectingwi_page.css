@@ -1,0 +1,83 @@
+﻿.wi {
+    max-height: 22em;
+    overflow: auto;
+    margin: 0%;
+    margin-top: 0px;
+    background-color: transparent;
+}
+
+.wi-text {
+    float: left;
+    font-weight: bold;
+    padding-top: 5%;
+    padding-bottom: 1%;
+}
+
+.connecting-wi-div {
+    width: 49%;
+    float: right;
+    display: grid;
+    margin-left: 2%;
+}
+
+.field:last-child {
+    margin-bottom: 3%;
+}
+
+.wi-new {
+    display: inline-flex;
+    width: 30%;
+}
+
+.wi-button {
+    width: 10%;
+    height: 20%;
+    display: grid;
+    border: 1px solid rgba(119, 107, 231, 1);
+    align-content: center;
+    margin: 10% 0 0 10%;
+    position: relative;
+    bottom: 4%;
+}
+
+.wi-number {
+    margin: 5% 0 0 0;
+}
+
+.field {
+    display: inline-block;
+    width: 100%;
+    height: min-content;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(119, 107, 231, 0.3);
+}
+
+.loading-spinner {
+    position: relative;
+    left: 45%;
+}
+
+.buttons {
+    float: right;
+}
+
+.delete-button {
+    display: none;
+    transition: 0.3s;
+}
+
+.field:hover .delete-button {
+    display: inline-block;
+}
+
+.conn-wi-div {
+    display: inline-block;
+    width: 100%;
+    height: min-content;
+    border-bottom: 1px solid rgba(119, 107, 231, 0.3);
+    animation: table_animation 300ms ease-in-out forwards;
+}
+
+.conn-wi-div:last-child {
+    margin-bottom: 10px;
+}

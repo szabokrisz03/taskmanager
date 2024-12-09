@@ -1,0 +1,18 @@
+﻿@using TaskManager.Srv.Model.DataModel;
+<MudForm Model="@Model" Validation="@FieldValidator" @bind-Errors="_errors" Style="min-width: 32em;">
+    <MudTextField Label="Név" For="@(() => Model.Name)" @bind-Value="Model.Name" OnlyValidateIfDirty="true" Immediate="true" />
+    <MudSelect T="WiType" Label="WI Típus" For="@(() => Model.WiType)" @bind-Value="Model.WiType" OnlyValidateIfDirty="true">
+        <MudSelectItem Value="WiType.Requirement">Igény</MudSelectItem>
+        <MudSelectItem Value="WiType.OrganoizationTask">Rendszerszervezési feladat</MudSelectItem>
+        <MudSelectItem Value="WiType.DevelopmentTask"> Fejlesztési feladat</MudSelectItem>
+        <MudSelectItem Value="WiType.TestTask">Technikai VJ</MudSelectItem>
+    </MudSelect>
+    <MudAutocomplete T="string" Label="Team Project" For="@(() => Model.TeamProject)" @bind-Value="Model.TeamProject" 
+        CoerceText="true" CoerceValue="true"
+        SearchFunc="SearchTeamProject" OnlyValidateIfDirty="true" />
+    <MudSelect T="TargetIterationType" Label="Iteration" For="@(() => Model.Iteration)" @bind-Value="Model.Iteration" OnlyValidateIfDirty="true" >
+        <MudSelectItem Value="TargetIterationType.Backlog">Backlog</MudSelectItem>
+        <MudSelectItem Value="TargetIterationType.CurrentIteration">Jelenlegi sprint</MudSelectItem>
+        <MudSelectItem Value="TargetIterationType.NextIteration">Következő sprint</MudSelectItem>
+    </MudSelect>
+</MudForm>

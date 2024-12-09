@@ -1,0 +1,12 @@
+﻿<MudMessageBox>
+    <MessageContent>
+    <MudText Typo="Typo.h6">Új határidő</MudText>
+    <TaskManager.Srv.Components.Forms.CreateMilestoneForm OnValidate="@((i) => OnValidate(i))" milestoneView="@milestoneViewModel" />
+    </MessageContent>
+    <CancelButton>
+        <MudButton OnClick="Cancel">Mégse</MudButton>
+    </CancelButton>
+    <YesButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@DisableSubmit" OnClick="CreateMilestone">Létrehozás</MudButton>
+    </YesButton>
+</MudMessageBox>

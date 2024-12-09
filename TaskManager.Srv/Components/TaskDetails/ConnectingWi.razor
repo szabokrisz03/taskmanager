@@ -1,0 +1,54 @@
+﻿@inject ISnackbar Snackbar
+
+<div class="connecting-wi-div">
+    <MudText class="wi-text">Kapcsolódó WI-k</MudText>
+    
+        <div class="wi-new">
+        <MudNumericField class="wi-number" @ref="_numField" @bind-Value="WiNumber" Adornment="Adornment.End" AdornmentColor="Color.Primary" AdornmentIcon="@Icons.Material.Filled.Add" OnAdornmentClick="@(() => AddWi())" Margin="Margin.Dense" HelperText="Wi szám" Variant="Variant.Outlined" Immediate="true" DisableUnderLine="true" HideSpinButtons="true"></MudNumericField>
+        </div>
+    <MudCard class="wi" Elevation="0">
+        @if (wiDetails != null)
+        {
+            @foreach (var item in wiDetails)
+            {
+                <MudCard class="field" Variant="Variant.Text" Elevation="0" Square="true">
+                    <MudIcon Icon="@Icons.Material.Filled.Task" Color="Color.Primary" Size="Size.Small"></MudIcon>
+                    <MudLink Typo="Typo.body2" Href="@item.Key.AzdoLink" Target="_blank" Color="Color.Primary">#@item.Key.Id- </MudLink>
+                    <MudText Inline="true" Typo="Typo.body2">@item.Key.Title</MudText>
+                    <span class="buttons">
+                        <MudIconButton Color="Color.Primary" Size="Size.Medium" class="delete-button" OnClick="@(() => deleteConnectingWi(item.Key.Id))" Icon="@Icons.Material.Filled.Delete"></MudIconButton>
+                        <MudIconButton Color="Color.Primary" Size="Size.Medium" Icon="@Icons.Material.Filled.ExpandMore" OnClick="@(() => ShowConnectingWi(item.Key.Id))"></MudIconButton>
+                    </span>
+                    <MudText Inline="false" Typo="Typo.body2">
+                        <b>Felelős: </b>@((item.Key.AssignedTo?.DisplayName == null) ? "-" : item.Key.AssignedTo?.DisplayName)
+                        <b>Állapot: </b> <span class="wi-state">@((item.Key.ClearState == "") ? "-" : item.Key.ClearState)</span>
+                        <b>Módosítva: </b>@item.Key.ChangedDate.ToString("yyyy.MM.dd")
+                    </MudText>
+                </MudCard>
+
+                @if (item.Key.IsOpen)
+                {
+                    @foreach (var wi in wiDetails[item.Key])
+                    {
+                        <div class="conn-wi-div">
+                            <div>
+                                <MudLink Href="@wi.AzdoLink" Typo="Typo.body2" Target="_blank" Color="Color.Info">#@wi.Id </MudLink>
+                                <span>@wi.Title</span>
+                            </div>
+                            <div class="wi-first-div">
+                                <span>@wi.AssignedTo?.DisplayName | </span>
+                                <span class="wi-child-state">@wi.State</span>
+                                <span><b> | Módosítva: </b>@wi.ChangedDate.ToString("yyyy.MM.dd") | </span>
+                                <span><b>Típus: </b>@wi.Type</span>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        }
+        else
+        {
+            <MudProgressCircular class="loading-spinner" Size="Size.Small" Color="Color.Secondary" Indeterminate="true" />
+        }
+    </MudCard>
+</div>

@@ -1,0 +1,60 @@
+﻿@page "/projects/{TechnicalName}/witemplates"
+@using TaskManager.Srv.Model.ViewModel;
+
+<MudText Typo="Typo.h6">Sablonok</MudText>
+
+<MudTable class="table"
+    T="WiLinkTemplateViewModel"
+    ServerData="LoadData">
+
+
+    <ToolBarContent>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CreateTemplate">Új Sablon</MudButton>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Név</MudTh>
+        <MudTh>Team Projekt</MudTh>
+        <MudTh>Cél Iteration</MudTh>
+        <MudTh>Típus</MudTh>
+        <MudTh>Alapértelmezett hozzárendelés</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.TeamProject</MudTd>
+        <MudTd>
+            @switch (context.Iteration)
+            {
+                case Model.DataModel.TargetIterationType.Backlog:
+                    <span>Backlog</span>
+                    break;
+                case Model.DataModel.TargetIterationType.CurrentIteration:
+                    <span>Aktuális sprint</span>
+                    break;
+                case Model.DataModel.TargetIterationType.NextIteration:
+                    <span>Következő sprint</span>
+                    break;
+            }
+        </MudTd>
+        <MudTd>
+            @switch (context.WiType)
+            {
+                case Model.DataModel.WiType.Requirement:
+                    <span>Igény</span>
+                    break;
+                case Model.DataModel.WiType.DevelopmentTask:
+                    <span>Fejlesztési feladat</span>
+                    break;
+                case Model.DataModel.WiType.TestTask:
+                    <span>Technikai VJ</span>
+                    break;
+                case Model.DataModel.WiType.OrganoizationTask:
+                    <span>Rendszerszervezési feladat</span>
+                    break;
+            }
+        </MudTd>
+        <MudTd>@(context.AssignedTo ?? "")</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudPagination />
+    </PagerContent>
+</MudTable>

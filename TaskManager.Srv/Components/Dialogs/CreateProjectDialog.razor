@@ -1,0 +1,12 @@
+﻿<MudMessageBox>
+    <MessageContent>
+        <MudText Typo="Typo.h6">Új projekt</MudText>
+        <TaskManager.Srv.Components.Forms.CreateProjectForm OnValidate="@((isValid) => OnValidate(isValid))" Model="@Project"/>
+    </MessageContent>
+    <CancelButton>
+        <MudButton OnClick="Cancel">Mégse</MudButton>
+    </CancelButton>
+    <YesButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@DisableSubmit" OnClick="CreateProject">Létrehozás</MudButton>
+    </YesButton>
+</MudMessageBox>

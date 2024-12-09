@@ -1,0 +1,56 @@
+﻿@implements IDisposable
+@inherits LayoutComponentBase
+@inject NavigationManager navmanager
+
+<MudThemeProvider @ref="_themeProvider" IsDarkMode="@_isDarkPreferred" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<PageTitle>Feladat kezelő</PageTitle>
+<MudLayout Class="full-height">
+    <MudAppBar Elevation="0">
+        <MudSpacer />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
+        <MudDrawerHeader Style="padding: 0" class="box" onclick="@(() => GoToMain())">
+            <MudText>Feladat kezelő</MudText>
+        </MudDrawerHeader>
+        <NavMenu />
+        <MudImage class="logo" Src="removedbglogo.png" Width="230" Alt="logo" Fluid></MudImage>
+    </MudDrawer>
+    <MudMainContent Class="full-height">
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-4 full-height">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private MudThemeProvider? _themeProvider;
+    private bool _isDarkPreferred = true;
+    private bool _drawerOpen = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (_themeProvider != null)
+        {
+            _isDarkPreferred = await _themeProvider.GetSystemPreference();
+        }
+
+        navmanager.LocationChanged += LocationChanged!;
+    }
+
+    void GoToMain()
+    {
+        navmanager.NavigateTo("");
+    }
+
+    void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        // intentional
+    }
+
+    public void Dispose()
+    {
+        navmanager.LocationChanged -= LocationChanged!;
+    }
+}

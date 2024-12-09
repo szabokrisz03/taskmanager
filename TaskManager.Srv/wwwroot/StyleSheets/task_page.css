@@ -1,0 +1,62 @@
+﻿* {
+    animation: table_animation 2s linear 0s steps(1, start) normal forwards;
+}
+
+.new-task-button {
+    float: right;
+}
+
+.task-title {
+    float: left;
+}
+
+.table {
+    display: block;
+    background-color: transparent;
+}
+
+.mud-select {
+    height: 2.4vw;
+    position: relative;
+    bottom: 0.4vw;
+}
+
+.cell {
+    width: 1%;
+}
+
+.dropdown-button {
+    min-width: 2.5em;
+    font-size: 15px;
+    float: right;
+}
+
+.pager-content {
+    background-color: transparent;
+    width: 100%;
+}
+
+.pagination {
+    padding: 4%;
+}
+
+.tr {
+    width: 100%;
+}
+
+.new-task-text {
+    padding-bottom: 10px;
+}
+
+.priority-row {
+    width: 10%;
+}
+
+.name-row {
+    width: 30%;
+}
+
+.user-autocomplete {
+    position: relative;
+    top: 10px;
+}

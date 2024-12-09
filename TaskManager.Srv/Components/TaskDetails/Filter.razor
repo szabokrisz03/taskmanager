@@ -1,0 +1,19 @@
+﻿@using TaskManager.Srv.Model.ViewModel;
+<MudTooltip Text="@((isOpen) ? "kész" : "filter")">
+    <MudIconButton Icon="@((isOpen) ? @Icons.Material.Filled.Done : @Icons.Material.Filled.ExpandMore)" Size="Size.Small" OnClick="@(() => (isOpen) ? CheckedFilterChanged() : OpenFilter())"
+                   Color="@((isOpen) ? Color.Success : Color.Warning)"></MudIconButton>
+</MudTooltip>
+
+<MudPopover Open="isOpen" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
+    <MudPaper MinWidth=" 200px" >
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Igeny_felmeres">Igényfelmérés</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Specifikacio_alatt">Specifikáció alatt</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Fejlesztesre_var">Fejlesztésre vár</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Fejlesztes_alatt">Fejlesztés alatt</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Teszteles_alatt">Tesztelés alatt</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Kiadasra_var">Kiadásra vár</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Verziozva">Verziózva</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Ajanlatadas">Ajánlatadás</MudCheckBox>
+        <MudCheckBox T="bool" Size="Size.Small" @bind-Checked="StateFilterViewModell!.Meghiusult">Meghiúsult</MudCheckBox>
+    </MudPaper>
+</MudPopover>

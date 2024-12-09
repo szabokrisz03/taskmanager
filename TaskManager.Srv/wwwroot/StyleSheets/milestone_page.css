@@ -1,0 +1,82 @@
+﻿.milestone-text {
+    float: left;
+    font-weight: bold;
+    padding-bottom: 7px;
+}
+
+.milestone {
+    max-height: 15em;
+    overflow: auto;
+    animation: table_animation 300ms ease-in-out forwards;
+    transform-origin: top center;
+    margin-top: 0px;
+    background-color: transparent;
+    border: 1px solid rgba(119, 107, 231, 1);
+}
+
+.milestone-div {
+    width: 49%;
+    float: left;
+    display: grid;
+    margin-left: 2%;
+}
+
+.mud-list-item {
+    height: 4em;
+}
+
+.name-date-text {
+    float: left;
+    display: inline-flex;
+    position: absolute;
+    top: 30%;
+    width: 85%;
+}
+
+.add-btn {
+    float: right;
+    width: 3%;
+    margin: 0 0 0 14%;
+    padding: 0;
+}
+
+.sub-btn {
+    width: 100%;
+    float: right;
+    padding: 0;
+}
+
+.delete-done-button {
+    display: inline-flex;
+    gap: 50%;
+}
+
+.milestone-form-1 {
+    width: 70%;
+    display: flex;
+}
+
+.milestone-text:hover {
+    cursor: pointer;
+}
+
+.milestone-name-th {
+    width: 50%;
+    display: table-cell;
+}
+
+.milestone-date-th {
+    width: 25%;
+    display: table-cell;
+}
+
+.milestone-delete-done {
+    width: 5%;
+    margin: 0;
+    padding: 1% !important;
+    display: table-cell;
+}
+
+.th {
+    overflow: hidden;
+}

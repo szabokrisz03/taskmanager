@@ -1,0 +1,4 @@
+﻿<MudForm Model="@milestoneView" Validation="@FieldValidator" @bind-Errors="_errors">
+    <MudTextField Label="Név" For="(() => milestoneView.Name)" @bind-Value="milestoneView.Name" OnlyValidateIfDirty="true" Immediate="true" />
+    <MudDatePicker For="(() => milestoneView.Planned)" Label="Határidő" @bind-Date="milestoneView.Planned" />
+</MudForm>

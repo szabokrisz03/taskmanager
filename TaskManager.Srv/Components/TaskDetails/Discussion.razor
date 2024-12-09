@@ -1,0 +1,26 @@
+﻿<div class="discussion-div">
+<MudText class="discussion-text">Történet</MudText>
+    <MudTextField class="discussion-input" style="margin: 0; padding: 0" Placeholder="Add a comment..." Clearable="true" Immediate="true" Lines="3" T="String" @bind-Value="Comment" DisableUnderLine="true" FullWidth="true" Margin="Margin.None"
+                  Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" AdornmentColor="Color.Primary" OnAdornmentClick="AddComments"></MudTextField>
+    <MudCard class="discussion" style="margin-top: 0px;" Elevation="0">
+        @if(commentViewModels != null)
+        {
+            @foreach(var item in commentViewModels)
+            {
+                <div>
+                    <MudPaper class="comment-paper">
+                        <MudText class="paper-text" style="font-size: 15px">@item.UserName.Split('\\').Last().Substring(0, 1).ToUpper()</MudText>
+                    </MudPaper>
+                    <MudField class="comment" Variant="Variant.Outlined">
+                        <span class="username">@item.UserName.Split('\\').Last() on @item.CreationDate</span>
+                        @if(item.UserName == authName)
+                        {
+                            <span class="delete-btn"><MudIconButton class="delete-btn" Icon="@Icons.Material.Filled.Delete" OnClick="(() => DeleteComment(item.UserName, item))"></MudIconButton></span>
+                        }
+                        <div class="comment-text">@item.Comment</div>
+                    </MudField>
+                </div>
+            }
+        }
+    </MudCard>
+</div>

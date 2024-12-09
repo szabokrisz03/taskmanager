@@ -1,0 +1,20 @@
+﻿@page "/"
+
+<MudStack>
+    <MudStack Reverse="true" Row="true">
+        <div class="element">
+            <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="AddNewProject">Új Projekt</MudButton>
+        </div>
+        <MudTextField class="search" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Keresés..." Immediate="true" @bind-Value="_searchTerm" />
+    </MudStack>
+    <MudTabs Elevation="0" Rounded="true" ApplyEffectsToContainer="true">
+        <div class="margin-bottom">
+            <MudTabPanel Text="Saját projektjeim">
+                <ProjectList @ref="projectList" MineOnly="true" SearchTerm="@_searchTerm" />
+            </MudTabPanel>
+        </div>
+        <MudTabPanel Text="Összes projekt">
+            <ProjectList @ref="projectList" MineOnly="false" SearchTerm="@_searchTerm" />
+        </MudTabPanel>
+    </MudTabs>
+</MudStack>
